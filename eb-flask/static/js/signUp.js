@@ -5,7 +5,7 @@ $(function(){
 		$.ajax({
 			url: '/signUp',
 			type: 'POST',
-			data: $('navbar-form').serialize(),
+			data: $('form').serialize(),
 			success: function(response){
 				console.log(response);
 			},
