@@ -6,10 +6,8 @@
     <title>InShelter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="../images/home.png">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <!-- Le styles -->
+    <!--styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -17,6 +15,9 @@
         padding-bottom: 40px;
       }
     </style>
+	<script src="https://raw.githubusercontent.com/vitalets/combodate/master/src/combodate.js"></script>
+	<script src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -75,34 +76,55 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
 		<div class="row">
-			<div class="span6">
+			<div class="span10">
 				<center>
-					<h1>Provide Shelter</h1>
-					<p></p>
-					<p>Register your organization and give homes to the homeless</p>
-					<img src="../images/heart-white.png" alt="Home" style="width:188px;height:188px;">
-				<center>
+					<h1>Orgnization Profile</h1>
+				</center>
+				<p></p>
 			</div>
-			<div class="span4">
-				<br>
+			<div class="span10">
 				<form class="navbar-form">
-				  <p style="font-size:100%;">Organization Name:
-					<input class="span4" type="text" placeholder="Your organization's name">
+				  <p style="font-size:100%;">E-Mail Address:
+					<input class="span10" type="text" placeholder="Enter your e-mail">
 				  </p>
 				  
-				  <p style="font-size:100%;">Organization Username:
-					<input class="span4" type="text" placeholder="Pick a username">
+				  <p style="font-size:100%;">Birthday:
+					<br>
+					<input class="span1" type='number' min="01" max="12" pattern='\d{2}' placeholder="MM">
+					<input class="span1" type='number' min="01" max="31" pattern='\d{2}' placeholder="DD">
+					<input class="span2" type='number' min="01" pattern='\d{4}' placeholder="YYYY">
 				  </p>
 				  
-				  <p style="font-size:100%;">Organization Password:
-					<input class="span4" type="password" placeholder="Create a password">
+				  <p style="font-size:100%;">Gender:
+					<select class="span10" name="gender">
+					  <option value="none">I am...</option>
+					  <option value="male">Male</option>
+					  <option value="female">Female</option>
+					  <option value="other">Other</option>
+					</select>
 				  </p>
 				  
-				  <button type="submit" class="btn btn-success">Sign Up</button>
+				  <p style="font-size:100%;">Phone Number:
+					<br>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXXX">
+				  </p>
+				  
+				  <p style="font-size:100%;">City:
+					<input class="span10" type="text" placeholder="Your current city">
+				  </p>
+				  
+				  <p style="font-size:100%;">State:
+					<input class="span10" type="text" placeholder="Your current state">
+				  </p>
+				  
+				  <button type="submit" class="btn btn-success">Save Profile</button>
 				</form>
 			</div>
 		</div>
       </div>
+
       <hr>
 
       <footer>
