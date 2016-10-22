@@ -9,7 +9,6 @@
 
     <!--styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
-	<script src="../assets/js/signUp.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -46,24 +45,18 @@
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            </ul>
+			<li class="dropdown nav pull-right">
+                <a href="#" class="dropdown-toggle brand " data-toggle="dropdown">Username<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Log Out</a></li>
                   <li><a href="#">Another action</a></li>
-					
                   <li class="divider"></li>
                   <li class="nav-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
                   <li><a href="#">One more separated link</a></li>
                 </ul>
               </li>
-            </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Username">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -74,46 +67,26 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
 		<div class="row">
-			<div class="span6">
+			<div class="span12">
 				<center>
-					<h1>Need Shelter?</h1>
+					<h2>Welcome to InShelter, FirstName</h2>
 					<p></p>
-					<p>Register and find open shelters fit for you</p>
-					<img src="../images/home.png" alt="Home" style="width:228px;height:228px;">
+					<p>Use the links below to navigate the site</p>
 				<center>
 			</div>
-			<div class="span4">
-				<form class="navbar-form">
-				  <p style="font-size:100%;">First Name:
-					<input class="span4" type="text" placeholder="Your first name">
-				  </p>
-				  
-				  <p style="font-size:100%;">Last Name:
-					<input id="inputEmail" class="span4" type="text" placeholder="Your last name">
-				  </p>
-				  
-				  <p style="font-size:100%;">Username:
-					<input id="inputName" class="span4" type="text" placeholder="Pick a username">
-				  </p>
-				  
-				  <p style="font-size:100%;">Password:
-					<input id="inputPassword" class="span4" type="password" placeholder="Create a password">
-				  </p>
-				  
-				  <button id="btnSignUp" type="submit" class="btn btn-success">Sign Up</button>
-				</form>
+			<div class="span12">
+				<center>
+					<a href="user-profile.html" class="btn btn-info" role="button">Edit My Profile</a>
+					<br>
+					<br>
+					<a href="#" class="btn btn-info" role="button">Update My Paperwork</a>
+					<br>
+					<br>
+					<a href="#" class="btn btn-info" role="button">Log Out</a>
+				</center>
 			</div>
 		</div>
       </div>
-
-      <!-- Example row of columns-->
-      <div class="row">
-        <div class="span10">
-          <p>Are you an organization looking to provide resources to the homeless? Register below!</p>
-          <p><a class="btn btn-success" href="org-signup.html">Organization Signup</a></p>
-        </div>
-	  </div>
-      <hr>
 
       <footer>
         <p>GlobalHack VI 2016</p>

@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <title>InShelter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="../images/home.png">
+	<link rel="icon" href="../static/images/home.png">
 
     <!--styles -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
-	<script src="../assets/js/signUp.js"></script>
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+	  <script src="../static/js/jquery.js"></script>
+	<script src="../static/js/signUp.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -59,11 +60,11 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form pull-right">
+            <!--form class="navbar-form pull-right">
               <input class="span2" type="text" placeholder="Username">
               <input class="span2" type="password" placeholder="Password">
               <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
+            </form-->
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -79,28 +80,28 @@
 					<h1>Need Shelter?</h1>
 					<p></p>
 					<p>Register and find open shelters fit for you</p>
-					<img src="../images/home.png" alt="Home" style="width:228px;height:228px;">
+					<img src="../static/images/home.png" alt="Home" style="width:228px;height:228px;">
 				<center>
 			</div>
 			<div class="span4">
-				<form class="navbar-form">
+				<form class="navbar-form" name="myform" >
 				  <p style="font-size:100%;">First Name:
 					<input class="span4" type="text" placeholder="Your first name">
 				  </p>
 				  
 				  <p style="font-size:100%;">Last Name:
-					<input id="inputEmail" class="span4" type="text" placeholder="Your last name">
+					<input name="inputEmail" id="inputEmail" class="span4" type="text" placeholder="Your last name">
 				  </p>
 				  
 				  <p style="font-size:100%;">Username:
-					<input id="inputName" class="span4" type="text" placeholder="Pick a username">
+					<input name="inputName" id="inputName" class="span4" type="text" placeholder="Pick a username">
 				  </p>
 				  
 				  <p style="font-size:100%;">Password:
-					<input id="inputPassword" class="span4" type="password" placeholder="Create a password">
+					<input name="inputPassword" id="inputPassword" class="span4" type="password" placeholder="Create a password">
 				  </p>
 				  
-				  <button id="btnSignUp" type="submit" class="btn btn-success">Sign Up</button>
+				  <button id="btnSignUp" type="button" class="btn btn-success">Sign Up</button>
 				</form>
 			</div>
 		</div>
@@ -124,19 +125,18 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>

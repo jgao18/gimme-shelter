@@ -9,15 +9,17 @@
 
     <!--styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
-	<script src="../assets/js/signUp.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
+	<script src="https://raw.githubusercontent.com/vitalets/combodate/master/src/combodate.js"></script>
+	<script src="http://momentjs.com/downloads/moment.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
@@ -74,45 +76,55 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
 		<div class="row">
-			<div class="span6">
+			<div class="span10">
 				<center>
-					<h1>Need Shelter?</h1>
-					<p></p>
-					<p>Register and find open shelters fit for you</p>
-					<img src="../images/home.png" alt="Home" style="width:228px;height:228px;">
-				<center>
+					<h1>My Profile</h1>
+				</center>
+				<p></p>
 			</div>
-			<div class="span4">
+			<div class="span10">
 				<form class="navbar-form">
-				  <p style="font-size:100%;">First Name:
-					<input class="span4" type="text" placeholder="Your first name">
+				  <p style="font-size:100%;">E-Mail Address: <a class="pull-right" href="https://accounts.google.com/SignUp" target="_blank">Don't have one? Click here to create one!</a>
+					<input class="span10" type="text" placeholder="Enter your e-mail">
 				  </p>
 				  
-				  <p style="font-size:100%;">Last Name:
-					<input id="inputEmail" class="span4" type="text" placeholder="Your last name">
+				  <p style="font-size:100%;">Birthday:
+					<br>
+					<input class="span1" type='number' min="01" max="12" pattern='\d{2}' placeholder="MM">
+					<input class="span1" type='number' min="01" max="31" pattern='\d{2}' placeholder="DD">
+					<input class="span2" type='number' min="01" pattern='\d{4}' placeholder="YYYY">
 				  </p>
 				  
-				  <p style="font-size:100%;">Username:
-					<input id="inputName" class="span4" type="text" placeholder="Pick a username">
+				  <p style="font-size:100%;">Gender:
+					<select class="span10" name="gender">
+					  <option value="none">I am...</option>
+					  <option value="male">Male</option>
+					  <option value="female">Female</option>
+					  <option value="other">Other</option>
+					</select>
 				  </p>
 				  
-				  <p style="font-size:100%;">Password:
-					<input id="inputPassword" class="span4" type="password" placeholder="Create a password">
+				  <p style="font-size:100%;">Phone Number:
+					<br>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input class="span1" type='text' pattern='\d{3}' placeholder="XXXX">
 				  </p>
 				  
-				  <button id="btnSignUp" type="submit" class="btn btn-success">Sign Up</button>
+				  <p style="font-size:100%;">City:
+					<input class="span10" type="text" placeholder="Your current city">
+				  </p>
+				  
+				  <p style="font-size:100%;">State:
+					<input class="span10" type="text" placeholder="Your current state">
+				  </p>
+				  
+				  <button type="submit" class="btn btn-success">Save Profile</button>
 				</form>
 			</div>
 		</div>
       </div>
 
-      <!-- Example row of columns-->
-      <div class="row">
-        <div class="span10">
-          <p>Are you an organization looking to provide resources to the homeless? Register below!</p>
-          <p><a class="btn btn-success" href="org-signup.html">Organization Signup</a></p>
-        </div>
-	  </div>
       <hr>
 
       <footer>
