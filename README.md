@@ -4,7 +4,9 @@ InShelter is an easy to use web application allowing homeless users to connect w
 
 ## Our Mission
 
+Inshelter provides our brothers and sisters experiencing homelessness with individually tailored and immediate connections to resources that can assist them in their unique circumstance.
 
+We believe that the only way to effectively fight homelessness is to value the humanity of every individual. To do this, we want to make as much information available to them as possible, while making the process of utilizing shelter services as easy as possible.
 
 ## Client Registration
 
@@ -14,7 +16,7 @@ Once a client is registered, InShelter provides information to them on shelters 
 
 ## Shelter Registration
 
-Shelters have their own registration form at *(insert domain name here)* which makes them visible to nearby clients and tracks reservations and availability as clients make and drop reservations.
+To participate, shelters must register as well. Shelters have their own registration form at *(insert domain name here)* which makes them visible to nearby clients and tracks reservations and availability as clients make and drop reservations.
 
 ## Built With
 
