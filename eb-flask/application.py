@@ -9,46 +9,63 @@ mysql = MySQL()
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
-app.config['MYSQL_DATABASE_DB'] = 'BucketList'
+app.config['MYSQL_DATABASE_DB'] = 'InShelter'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
 
 @app.route("/")
 def main():
-    return render_template('homepage.html')
+    return render_template('index.html')
 
-@app.route('/showNavPage')
-def showNavPage():
+@app.route('/showOrgRegPage')
+def showOrgRegPage():
+    return render_template('org-signup.html')
+
+@app.route('/showUserNavPage')
+def showUserNavPage():
     return render_template('user-home.html')
+    
+@app.route('/showOrgNavPage')
+def showOrgNavPage():
+    return render_template('org-home.html')
+    
+@app.route('/showUserProfilePage')
+def showUserProfilePage():
+    return render_template('user-profile.html')
+    
+@app.route('/showOrgProfilePage')
+def showOrgProfilePage():
+    return render_template('org-profile.html')
+    
 
 @app.route('/signUp',methods=['POST','GET'])
 def signUp():
-	
+    
     # read the posted values from the UI
-    _name = request.form['inputName']
-    _email = request.form['inputEmail']
+    _firstName = request.form['inputFirstName']
+    _lastName = request.form['inputLastName']
+    _username = request.form['inputUsername']
     _password = request.form['inputPassword']
  
     # validate the received values
-    if _name and _email and _password:
+    if _firstName and _lastName and _username and _password:
         json.dumps({'message':'User created successfully !'})
         
         conn = mysql.connect()
         cursor = conn.cursor()
         _hashed_password = generate_password_hash(_password)
-        cursor.callproc('sp_createUser',(_name,_email,_hashed_password))
+        cursor.callproc('sp_createResident',(_firstName,_lastName,_username,_hashed_password))
 
         data = cursor.fetchall()
  
         if len(data) is 0:
             conn.commit()
-            showNavPage()
-            return json.dumps({'message':'User created successfully !'})
+            return json.dumps({'message':'User created successfully !', 'username':_username, 'firstName':_firstName, 'lastName':_lastName,})
         else:
             return json.dumps({'error':str(data[0])})
     else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
+        return json.dumps({'message':'missing fields'})
 
 if __name__ == "__main__":
     app.run()

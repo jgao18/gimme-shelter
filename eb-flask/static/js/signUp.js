@@ -1,4 +1,3 @@
-// test
 $(function(){
 	$('#btnSignUp').click(function(){
 		console.log("This is working so far");
@@ -7,10 +6,25 @@ $(function(){
 			type: 'POST',
 			data: $('form').serialize(),
 			success: function(response){
+                console.log("success");
+                var parsedData = JSON.parse(response);
+                console.log(parsedData);
+                var firstName = parsedData.firstName
+                var lastName = parsedData.lastName
+                var username = parsedData.username
+                if (parsedData.message.includes("missing fields")) {
+                    alert("You haven't filled out all of the fields!");
+                } else {
+                    alert("You have successfully registered!");
+                    var c = "username=" + username + ";" + "firstName=" + firstName + ";" + "lastName=" + lastName + ";"
+                    document.cookie = "username=" + username + ";" + "firstName=" + firstName + ";" + "lastName=" + lastName + ";";
+                    alert(c);
+                    location.href = "/showUserNavPage";
+                }
 				console.log(response);
 			},
 			error: function(error){
-				console.log("This is NOT NOT NOT working so far");
+                console.log("failure");
 				console.log(error);
 			}
 		});

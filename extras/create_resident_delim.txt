@@ -1,0 +1,31 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createResident`(
+    IN p_First_name VARCHAR(50),
+    IN p_Last_name VARCHAR(50),
+    IN p_Username VARCHAR(50),
+    IN p_Password VARCHAR(100)
+)
+BEGIN
+    if ( select exists (select 1 from Resident where Username = p_Username) ) THEN
+     
+        select 'Username Already Exists!';
+     
+    ELSE
+     
+        insert into Resident
+        (
+            First_name,
+            Last_name,
+            Username,
+            Password
+        )
+        values
+        (
+            p_First_name,
+            p_Last_name,
+            p_Username,
+            p_Password
+        );
+    END IF;
+END$$
+DELIMITER ;

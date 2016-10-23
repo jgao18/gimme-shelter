@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <title>InShelter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="../images/home.png">
+	<link rel="icon" href="../static/images/home.png">
 
     <!--styles -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+	<script src="../static/js/jquery.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -42,30 +43,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="homepage.html">InShelter</a>
+          <a class="brand" href="/">InShelter</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="/">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            </ul>
+			<li class="dropdown nav pull-right">
+                <a href="#" class="dropdown-toggle brand " data-toggle="dropdown">Username<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Log Out</a></li>
                   <li><a href="#">Another action</a></li>
-					
                   <li class="divider"></li>
                   <li class="nav-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
                   <li><a href="#">One more separated link</a></li>
                 </ul>
               </li>
-            </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Username">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -78,30 +73,27 @@
 		<div class="row">
 			<div class="span10">
 				<center>
-					<h1>Orgnization Profile</h1>
+					<h1>Organization Profile</h1>
 				</center>
 				<p></p>
 			</div>
 			<div class="span10">
-				<form class="navbar-form">
-				  <p style="font-size:100%;">E-Mail Address:
-					<input class="span10" type="text" placeholder="Enter your e-mail">
-				  </p>
-				  
-				  <p style="font-size:100%;">Birthday:
+			    <center>
 					<br>
-					<input class="span1" type='number' min="01" max="12" pattern='\d{2}' placeholder="MM">
-					<input class="span1" type='number' min="01" max="31" pattern='\d{2}' placeholder="DD">
-					<input class="span2" type='number' min="01" pattern='\d{4}' placeholder="YYYY">
+					<h3><u>Basic Information</u></h3>
+					<br>
+			    </center>
+				<form class="navbar-form">
+				  <p style="font-size:100%;">Organization Name:
+					<input class="span10" type="text" placeholder="Your organization's name">
 				  </p>
 				  
-				  <p style="font-size:100%;">Gender:
-					<select class="span10" name="gender">
-					  <option value="none">I am...</option>
-					  <option value="male">Male</option>
-					  <option value="female">Female</option>
-					  <option value="other">Other</option>
-					</select>
+				  <p style="font-size:100%;">Address:
+					<input class="span10" type="text" placeholder="Your organization's address">
+				  </p>
+				  
+				  <p style="font-size:100%;">E-Mail Address:
+					<input class="span10" type="text" placeholder="Your organization's e-mail">
 				  </p>
 				  
 				  <p style="font-size:100%;">Phone Number:
@@ -111,13 +103,161 @@
 					<input class="span1" type='text' pattern='\d{3}' placeholder="XXXX">
 				  </p>
 				  
-				  <p style="font-size:100%;">City:
-					<input class="span10" type="text" placeholder="Your current city">
+				  <p style="font-size:100%;">Capacity:
+					<input class="span10" type="text" placeholder="Your maximum shelter capacity">
 				  </p>
 				  
-				  <p style="font-size:100%;">State:
-					<input class="span10" type="text" placeholder="Your current state">
+				  <p style="font-size:100%;">Beds Available:
+					<input class="span10" type="number" placeholder="Number of open beds available">
 				  </p>
+				  
+				  <p style="font-size:100%;">Resident Age Range:
+					<br>
+					<input class="span1" type='number' min="00" max="140" pattern='\d{3}' placeholder="00" <h5 class="span1"> -</h5>
+					<input class="span1" type='number' min="00" max="140" pattern='\d{3}' placeholder="140" <h5 class="span1">  years old</h5> 
+				  </p>
+				  
+				  <p style="font-size:100%;">Closing Time:
+					<br>
+					<input class="span1" type='number' min="00" max="12" pattern='\d{2}' placeholder="HH" <h5 class="span1"> :</h5>
+					<input class="span1" type='number' min="00" max="59" pattern='\d{2}' placeholder="MM" <h5 class="span1">
+				  </p>
+				  
+				  <center>
+					<br>
+					<h3><u>Residency Restrictions</u></h3>
+					<h4>How do you want your incoming residents to answer the following questions?</h4>
+					<br>
+				  </center>
+				  
+				  <p style="font-size:100%;">Do you house only men, only women, or both?
+					<div class="radio">
+					  <label><input type="radio" name="q0" id="r1">Only Men</label>
+					  <label><input type="radio" name="q0" id="r2">Only Women</label>
+					  <label><input type="radio" name="q0" id="r3">Both/Any</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Do you frequently sleep in anything other than a shelter, traditional housing, or a safe haven?
+					<div class="radio">
+					  <label><input type="radio" name="q1" id="r1">Yes</label>
+					  <label><input type="radio" name="q1" id="r2">No</label>
+					  <label><input type="radio" name="q1" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Have you experienced 1 or more consecutive years of homelessness and/or 4+ episodes of homelessness?
+					<div class="radio">
+					  <label><input type="radio" name="q2" id="r1">Yes</label>
+					  <label><input type="radio" name="q2" id="r2">No</label>
+					  <label><input type="radio" name="q2" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">In the past six months have you had four or more interactions with emergency services?
+					<div class="radio">
+					  <label><input type="radio" name="q3" id="r1">Yes</label>
+					  <label><input type="radio" name="q3" id="r2">No</label>
+					  <label><input type="radio" name="q3" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Have you threatened to harm or harmed yourself or others?
+					<div class="radio">
+					  <label><input type="radio" name="q4" id="r1">Yes</label>
+					  <label><input type="radio" name="q4" id="r2">No</label>
+					  <label><input type="radio" name="q4" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Do you have any legal issues?
+					<div class="radio">
+					  <label><input type="radio" name="q5" id="r1">Yes</label>
+					  <label><input type="radio" name="q5" id="r2">No</label>
+					  <label><input type="radio" name="q5" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Do you do risky things or get tricked into doing things you don’t want to do?
+					<div class="radio">
+					  <label><input type="radio" name="q6" id="r1">Yes</label>
+					  <label><input type="radio" name="q6" id="r2">No</label>
+					  <label><input type="radio" name="q6" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Is there anyone that thinks you owe them money OR do you not have a source of income?
+					<div class="radio">
+					  <label><input type="radio" name="q7" id="r1">Yes</label>
+					  <label><input type="radio" name="q7" id="r2">No</label>
+					  <label><input type="radio" name="q7" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Do you have planned activities other than just surviving that make you feel happy and fulfilled?
+					<div class="radio">
+					  <label><input type="radio" name="q8" id="r1">Yes</label>
+					  <label><input type="radio" name="q8" id="r2">No</label>
+					  <label><input type="radio" name="q8" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Are you currently able to take care of basic needs, like bathing, changing clothes, using a restroom, getting food and clean water, etc.?
+					<div class="radio">
+					  <label><input type="radio" name="q9" id="r1">Yes</label>
+					  <label><input type="radio" name="q9" id="r2">No</label>
+					  <label><input type="radio" name="q9" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Is your current homelessness in any way caused by a relationship that broke down, an unhealthy or abusive relationship, or because family or friends caused you to become evicted?
+					<div class="radio">
+					  <label><input type="radio" name="q10" id="r1">Yes</label>
+					  <label><input type="radio" name="q10" id="r2">No</label>
+					  <label><input type="radio" name="q10" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Would you consider yourself physically healthy?
+					<div class="radio">
+					  <label><input type="radio" name="q11" id="r1">Yes</label>
+					  <label><input type="radio" name="q11" id="r2">No</label>
+					  <label><input type="radio" name="q11" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Have alcohol or drug use caused you problems, or do you expect them to cause you problems in the future?
+					<div class="radio">
+					  <label><input type="radio" name="q12" id="r1">Yes</label>
+					  <label><input type="radio" name="q12" id="r2">No</label>
+					  <label><input type="radio" name="q12" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Has mental health caused you problems, or do you expect them to cause you problems in the future?
+					<div class="radio">
+					  <label><input type="radio" name="q13" id="r1">Yes</label>
+					  <label><input type="radio" name="q13" id="r2">No</label>
+					  <label><input type="radio" name="q13" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Are you doing anything other than taking your prescribed medicine?
+					<div class="radio">
+					  <label><input type="radio" name="q14" id="r1">Yes</label>
+					  <label><input type="radio" name="q14" id="r2">No</label>
+					  <label><input type="radio" name="q14" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
+				  <p style="font-size:100%;">Has your current period of homelessness been caused by an experience of emotional, physical, psychological, sexual, or other type of abuse, or by any other trauma you have experienced?
+					<div class="radio">
+					  <label><input type="radio" name="q15" id="r1">Yes</label>
+					  <label><input type="radio" name="q15" id="r2">No</label>
+					  <label><input type="radio" name="q15" id="r3">Don't Care</label>
+					</div>
+				  </p>
+				  
 				  
 				  <button type="submit" class="btn btn-success">Save Profile</button>
 				</form>
@@ -136,19 +276,18 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>
