@@ -1,0 +1,8 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_validateUserLogin`(
+  IN p_username VARCHAR(50)
+)
+BEGIN
+    select * from resident where Username = p_username;
+END$$
+DELIMITER ;

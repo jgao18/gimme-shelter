@@ -10,6 +10,7 @@
     <!--styles -->
     <link href="../static/css/bootstrap.css" rel="stylesheet">
 	<script src="../static/js/jquery.js"></script>
+    <script src="../static/js/saveUserProfile.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -85,57 +86,51 @@
 			    </center>
 				<form class="navbar-form">
 				  <p style="font-size:100%;">First Name:
-					<input class="span10" type="text" placeholder="Your first name">
+					<input class="span10" name="uFirstName" id="uFirstName" type="text" value={{ userInfo['firstName'] }}>
 				  </p>
 				  
 				  <p style="font-size:100%;">Last Name:
-					<input class="span10" type="text" placeholder="Your last name">
-				  </p>
-				  
-				  <p style="font-size:100%;">Nickname:
-					<input class="span10" type="text" placeholder="What do you go by?">
+					<input class="span10" name="uLastName" id="uLastName" type="text" value={{ userInfo['lastName'] }}>
 				  </p>
 				  
 				  <p style="font-size:100%;">Language Preference:
-					<input class="span10" type="text" placeholder="Your favorite language">
+					<input class="span10" name="uLanguage" id="uLanguage" type="text" placeholder="Your favorite language">
 				  </p>
 				  
 				  <p style="font-size:100%;">E-Mail Address: <a class="pull-right" href="https://accounts.google.com/SignUp" target="_blank">Don't have one? Click here to create one!</a>
-					<input class="span10" type="text" placeholder="Enter your e-mail">
+					<input class="span10" name="uEmail" id="uEmail" type="text" placeholder="Enter your e-mail">
 				  </p>
 				  
 				  <p style="font-size:100%;">Birthday:
 					<br>
-					<input class="span1" type='number' min="01" max="12" pattern='\d{2}' placeholder="MM">
-					<input class="span1" type='number' min="01" max="31" pattern='\d{2}' placeholder="DD">
-					<input class="span2" type='number' min="01" pattern='\d{4}' placeholder="YYYY">
+					<input name="uBdayM" id="uBdayM" class="span1" type='number' min="01" max="12" pattern='\d{2}' placeholder="MM">
+					<input name="uBdayD" id="uBdayD" class="span1" type='number' min="01" max="31" pattern='\d{2}' placeholder="DD">
+					<input name="uBdayY" id="uBdayY" class="span2" type='number' min="01" pattern='\d{4}' placeholder="YYYY">
 				  </p>
 				  
 				  <p style="font-size:100%;">Gender:
-					<select class="span10" name="gender">
-					  <option value="none">I am...</option>
-					  <option value="male">Male</option>
+					<select name="uGender" id="uGender" class="span10">
 					  <option value="female">Female</option>
-					  <option value="other">Other</option>
+					  <option value="male">Male</option>
 					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Social Security Number:
 					<br>
-					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
-					<input class="span1" type='text' pattern='\d{2}' placeholder="XX" <a> - </a></input>
-					<input class="span1" type='text' pattern='\d{4}' placeholder="XXXX">
+					<input name="uSSN1" id="uSSN1" class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input name="uSSN2" id="uSSN2" class="span1" type='text' pattern='\d{2}' placeholder="XX" <a> - </a></input>
+					<input name="uSSN3" id="uSSN3" class="span1" type='text' pattern='\d{4}' placeholder="XXXX">
 				  </p>
 				  
 				  <p style="font-size:100%;">Phone Number:
 					<br>
-					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
-					<input class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
-					<input class="span1" type='text' pattern='\d{3}' placeholder="XXXX">
+					<input name="uPhone1" id="uPhone1" class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input name="uPhone2" id="uPhone2" class="span1" type='text' pattern='\d{3}' placeholder="XXX" <a> - </a></input>
+					<input name="uPhone3" id="uPhone3" class="span1" type='text' pattern='\d{3}' placeholder="XXXX">
 				  </p>
 				  
 				  <p style="font-size:100%;">Where is it easiest to find you?:
-					<input class="span10" type="text" placeholder="An address, street intersection, store, city, and/or state">
+					<input class="span10" name="uLocation" id="uLocation" type="text" placeholder="An address, street intersection, store, city, and/or state">
 				  </p>
 				  
 				<center>
@@ -145,112 +140,112 @@
 			    </center>
 				
 				  <p style="font-size:100%;">Do you frequently sleep in anything other than a shelter, traditional housing, or a safe haven?
-					<div class="radio">
-					  <label><input type="radio" name="q1" id="r1">Yes</label>
-					  <label><input type="radio" name="q1" id="r2">No</label>
-					</div>
+					<select name="sleepout" id="sleepout" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Have you experienced 1 or more consecutive years of homelessness and/or 4+ episodes of homelessness?
-					<div class="radio">
-					  <label><input type="radio" name="q2" id="r1">Yes</label>
-					  <label><input type="radio" name="q2" id="r2">No</label>
-					</div>
+					<select name="vethl" id="vethl" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">In the past six months have you had four or more interactions with emergency services?
-					<div class="radio">
-					  <label><input type="radio" name="q3" id="r1">Yes</label>
-					  <label><input type="radio" name="q3" id="r2">No</label>
-					</div>
+					<select name="eserve" id="eserve" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Have you threatened to harm or harmed yourself or others?
-					<div class="radio">
-					  <label><input type="radio" name="q4" id="r1">Yes</label>
-					  <label><input type="radio" name="q4" id="r2">No</label>
-					</div>
+					<select name="harm" id="harm" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Do you have any legal issues?
-					<div class="radio">
-					  <label><input type="radio" name="q5" id="r1">Yes</label>
-					  <label><input type="radio" name="q5" id="r2">No</label>
-					</div>
+					<select name="legal" id="legal" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Do you do risky things or get tricked into doing things you don’t want to do?
-					<div class="radio">
-					  <label><input type="radio" name="q6" id="r1">Yes</label>
-					  <label><input type="radio" name="q6" id="r2">No</label>
-					</div>
+					<select name="exploit" id="exploit" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Is there anyone that thinks you owe them money OR do you not have a source of income?
-					<div class="radio">
-					  <label><input type="radio" name="q7" id="r1">Yes</label>
-					  <label><input type="radio" name="q7" id="r2">No</label>
-					</div>
+					<select name="money" id="money" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Do you have planned activities other than just surviving that make you feel happy and fulfilled?
-					<div class="radio">
-					  <label><input type="radio" name="q8" id="r1">Yes</label>
-					  <label><input type="radio" name="q8" id="r2">No</label>
-					</div>
+					<select name="meaning" id="meaning" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Are you currently able to take care of basic needs, like bathing, changing clothes, using a restroom, getting food and clean water, etc.?
-					<div class="radio">
-					  <label><input type="radio" name="q9" id="r1">Yes</label>
-					  <label><input type="radio" name="q9" id="r2">No</label>
-					</div>
+					<select name="selfcare" id="selfcare" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Is your current homelessness in any way caused by a relationship that broke down, an unhealthy or abusive relationship, or because family or friends caused you to become evicted?
-					<div class="radio">
-					  <label><input type="radio" name="q10" id="r1">Yes</label>
-					  <label><input type="radio" name="q10" id="r2">No</label>
-					</div>
+					<select name="social" id="social" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Would you consider yourself physically healthy?
-					<div class="radio">
-					  <label><input type="radio" name="q11" id="r1">Yes</label>
-					  <label><input type="radio" name="q11" id="r2">No</label>
-					</div>
+					<select name="physical" id="physical" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Have alcohol or drug use caused you problems, or do you expect them to cause you problems in the future?
-					<div class="radio">
-					  <label><input type="radio" name="q12" id="r1">Yes</label>
-					  <label><input type="radio" name="q12" id="r2">No</label>
-					</div>
+					<select name="substance" id="substance" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Has mental health caused you problems, or do you expect them to cause you problems in the future?
-					<div class="radio">
-					  <label><input type="radio" name="q13" id="r1">Yes</label>
-					  <label><input type="radio" name="q13" id="r2">No</label>
-					</div>
+					<select name="mental" id="mental" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Are you doing anything other than taking your prescribed medicine?
-					<div class="radio">
-					  <label><input type="radio" name="q14" id="r1">Yes</label>
-					  <label><input type="radio" name="q14" id="r2">No</label>
-					</div>
+					<select name="medication" id="medication" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  <p style="font-size:100%;">Has your current period of homelessness been caused by an experience of emotional, physical, psychological, sexual, or other type of abuse, or by any other trauma you have experienced?
-					<div class="radio">
-					  <label><input type="radio" name="q15" id="r1">Yes</label>
-					  <label><input type="radio" name="q15" id="r2">No</label>
-					</div>
+					<select name="abuse" id="abuse" class="span10">
+					  <option value=0>No</option>
+					  <option value=1>Yes</option>
+					</select>
 				  </p>
 				  
 				  
-				  <button type="submit" class="btn btn-success">Save Profile</button>
+				  <a id="btnSaveProfile" class="btn btn-success">Save Profile</a>
 				</form>
 			</div>
 		</div>

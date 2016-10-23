@@ -1,0 +1,57 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_saveProfile`(
+    IN p_Username VARCHAR(50),
+    IN p_First_name VARCHAR(50),
+    IN p_Last_name VARCHAR(50),
+    IN p_Language VARCHAR(20),
+    IN p_Email VARCHAR(50),
+    IN p_Birthday DATE,
+    IN p_Gender CHAR,
+    IN p_SSN INT,
+    IN p_Phone INT,
+    IN p_Location VARCHAR(100),
+    IN p_Sleepout INT,
+    IN p_Vethl INT,
+    IN p_Eserve INT,
+    IN p_Harm INT,
+    IN p_Legal INT,
+    IN p_Exploit INT,
+    IN p_Money INT,
+    IN p_Meaning INT,
+    IN p_Selfcare INT,
+    IN p_Social INT,
+    IN p_Physical INT,
+    IN p_Substance INT,
+    IN p_Mental INT,
+    IN p_Medication INT,
+    IN p_Abuse INT
+)
+BEGIN
+        update Resident
+        SET First_name=p_First_name,
+            Last_name=p_Last_name,
+            First_lang=p_Language,
+            Email=p_Email,
+            DoB=p_Birthday,
+            Sex=p_Gender,
+            SSN=p_SSN,
+            Phone_num=p_Phone,
+            Location=p_Location,
+            Sleep_outside=p_Sleepout,
+            Veteran_homeless=p_Vethl,
+            Emergency_service=p_Eserve,
+            Harm=p_Harm,
+            Legal=p_Legal,
+            Exploitation=p_Exploit,
+            Money=p_Money,
+            Meaningful=p_Meaning,
+            Self_care=p_Selfcare,
+            Social=p_Social,
+            Physical=p_Physical,
+            Substance=p_Substance,
+            Mental=p_Mental,
+            Medication=p_Medication,
+            Abuse=p_Abuse
+        where Username=p_Username;
+END$$
+DELIMITER ;
