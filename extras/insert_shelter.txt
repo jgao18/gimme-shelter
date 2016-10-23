@@ -29,5 +29,5 @@
         )
         values
         (
-            "weacceptall", "password", "We Accept All Shelter", "Seattle, Washington", "20", "9", "22:22:22", 1, 1, 1, 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+            "abusedonly", "password", "Abused Women Only Shelter", "Dallas, Texas", "10", "8", "18:30:00", 0, 1, 1, 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1
         );

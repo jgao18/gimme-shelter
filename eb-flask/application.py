@@ -39,7 +39,11 @@ def showUserNavPage():
     
 @app.route('/showOrgNavPage')
 def showOrgNavPage():
-    return render_template('org-home.html')
+    if session.get('user'):
+        userInfo = {"id": session['id'], "username": session['user'], "orgName": session['orgname'],"location": session['location']}
+        return render_template('org-home.html', userInfo = userInfo)
+    else:
+        return render_template('org-signup.html')
     
 @app.route('/showUserProfilePage')
 def showUserProfilePage():
@@ -51,7 +55,11 @@ def showUserProfilePage():
     
 @app.route('/showOrgProfilePage')
 def showOrgProfilePage():
-    return render_template('org-profile.html')
+    if session.get('user'):
+        userInfo = {"id": session['id'], "username": session['user'], "orgName": session['orgname'],"location": session['location']}
+        return render_template('org-profile.html', userInfo = userInfo)
+    else:
+        return render_template('org-signup.html')
 
 @app.route('/showErrorPage')
 def showErrorPage():
@@ -85,6 +93,36 @@ def signUp():
             return json.dumps({'message':str(data[0])})
     else:
         return json.dumps({'message':'missing fields'})
+        
+@app.route('/orgSignUp',methods=['POST','GET'])
+def orgSignUp():
+    
+    # read the posted values from the UI
+    _orgName = request.form['inputOrgName']
+    _username = request.form['inputUsername']
+    _password = request.form['inputPassword']
+    _location = request.form['inputLocation']
+    _beds = request.form['inputBeds']
+ 
+    # validate the received values
+    if _orgName and _username and _password and _location and _beds:
+        json.dumps({'message':'User created successfully !'})
+        print "hello"
+        
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        _hashed_password = generate_password_hash(_password)
+        cursor.callproc('sp_createOrg',(_orgName,_username,_hashed_password,_location,_beds))
+
+        data = cursor.fetchall()
+ 
+        if len(data) is 0:
+            conn.commit()
+            return json.dumps({'message':'User created successfully !', 'username':_username, 'orgName':_orgName,})
+        else:
+            return json.dumps({'message':str(data[0])})
+    else:
+        return json.dumps({'message':'missing fields'})
 
 @app.route('/validateLogin',methods=['POST'])
 def validateLogin():
@@ -98,12 +136,41 @@ def validateLogin():
         data = cursor.fetchall()
 
         if len(data) > 0:
-            print str(data[0][2])
             if check_password_hash(str(data[0][2]),_password):
                 session['id'] = data[0][0]
                 session['user'] = data[0][1]
                 session['fname'] = data[0][3]
                 session['lname'] = data[0][4]
+                session['location'] = data[0][5]
+
+                return json.dumps({'message':'success'})
+            else:
+                return json.dumps({'message':'error'})
+        else:
+            return json.dumps({'message':'error'})
+ 
+    except Exception as e:
+        return json.dumps({'message':'error'})  
+    finally:
+        cursor.close()
+        con.close()
+        
+@app.route('/validateOrgLogin',methods=['POST'])
+def validateOrgLogin():
+    try:
+        _username = request.form['loginUsername']
+        _password = request.form['loginPassword']
+
+        con = mysql.connect()
+        cursor = con.cursor()
+        cursor.callproc('sp_validateOrgLogin',(_username,))
+        data = cursor.fetchall()
+
+        if len(data) > 0:
+            if check_password_hash(str(data[0][2]),_password):
+                session['id'] = data[0][0]
+                session['user'] = data[0][1]
+                session['orgname'] = data[0][3]
                 session['location'] = data[0][5]
 
                 return json.dumps({'message':'success'})
@@ -208,10 +275,10 @@ def getElegibleShelters(personId):
     elegible = []
     for shelterStat in shelterStats:
         isElegible = True
-        if sex == 'M':
+        if sex == 'm':
             if shelterStat[1] != 1:
                 isElegible = False
-        elif sex == 'F':
+        elif sex == 'f':
             if shelterStat[2] != 1:
                 isElegible = False
 

@@ -1,0 +1,34 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createOrg`(
+    IN p_Org_name VARCHAR(50),
+    IN p_Username VARCHAR(50),
+    IN p_Password VARCHAR(100),
+    IN p_Location VARCHAR(100),
+    IN p_Beds INT
+)
+BEGIN
+    if ( select exists (select 1 from Shelter where Username = p_Username) ) THEN
+     
+        select 'Username Already Exists!';
+     
+    ELSE
+     
+        insert into Shelter
+        (
+            Name,
+            Username,
+            Password,
+            addr,
+            beds_avail
+        )
+        values
+        (
+            p_Org_name,
+            p_Username,
+            p_Password,
+            p_Location,
+            p_Beds
+        );
+    END IF;
+END$$
+DELIMITER ;

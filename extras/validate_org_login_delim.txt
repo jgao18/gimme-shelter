@@ -1,0 +1,8 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_validateOrgLogin`(
+  IN p_username VARCHAR(50)
+)
+BEGIN
+    select * from shelter where Username = p_username;
+END$$
+DELIMITER ;
