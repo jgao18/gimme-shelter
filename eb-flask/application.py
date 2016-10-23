@@ -149,7 +149,7 @@ def saveUserProfile():
     _lastName = request.form['uLastName'] or None
     _language = request.form['uLanguage'] or None
     _email = request.form['uEmail'] or None
-    _birthday = request.form['uBdayM'] + request.form['uBdayD'] + request.form['uBdayY'] or None
+    _birthday = request.form['uBdayY'] + "-" + request.form['uBdayM'] + "-" + request.form['uBdayD'] or None
     _gender = request.form['uGender'][0] or None
     _ssn = request.form['uSSN1'] + request.form['uSSN2'] + request.form['uSSN3'] or None
     _phone = request.form['uPhone1'] + request.form['uPhone2'] + request.form['uPhone3'] or None
@@ -172,8 +172,8 @@ def saveUserProfile():
 	
 	# validate the received values
     if True:
-        if _birthday != None: 
-            _birthday = int(_birthday)
+        if _birthday != None:
+            _birthday = datetime.strptime(_birthday, '%Y-%m-%d')
         if _ssn != None: 
             _ssn = int(_ssn)
         if _phone != None: 
@@ -252,7 +252,11 @@ def getShelterInfo(shelterIds):
     for i in range(0, len(shelterIds)):
 
         cursor.execute("SELECT name, addr, beds_avail, closes_by FROM Shelter WHERE Id=" + str(shelterIds[i]) + ";")
-        shelterLocs.append(cursor.fetchone())
+        tup = cursor.fetchone()
+        lst = list(tup)
+        lst[3] = str(lst[3])
+        tup = tuple(lst)
+        shelterLocs.append(tup)
     return shelterLocs
 
 def convertGmapsData(result, numberOfAddresses):
