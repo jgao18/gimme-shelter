@@ -20,7 +20,7 @@ mysql.init_app(app)
 @app.route("/")
 def main():
     if session.get('user'):
-        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname']}
+        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname'], "location": session['location']}
         return render_template('user-home.html', userInfo = userInfo)
     else:
         return render_template('index.html')
@@ -32,7 +32,7 @@ def showOrgRegPage():
 @app.route('/showUserNavPage')
 def showUserNavPage():
     if session.get('user'):
-        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname']}
+        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname'], "location": session['location']}
         return render_template('user-home.html', userInfo = userInfo)
     else:
         return render_template('index.html')
@@ -44,7 +44,7 @@ def showOrgNavPage():
 @app.route('/showUserProfilePage')
 def showUserProfilePage():
     if session.get('user'):
-        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname']}
+        userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname'], "location": session['location']}
         return render_template('user-profile.html', userInfo = userInfo)
     else:
         return render_template('index.html')
@@ -65,15 +65,16 @@ def signUp():
     _lastName = request.form['inputLastName']
     _username = request.form['inputUsername']
     _password = request.form['inputPassword']
+    _location = request.form['inputLocation']
  
     # validate the received values
-    if _firstName and _lastName and _username and _password:
+    if _firstName and _lastName and _username and _password and _location:
         json.dumps({'message':'User created successfully !'})
         
         conn = mysql.connect()
         cursor = conn.cursor()
         _hashed_password = generate_password_hash(_password)
-        cursor.callproc('sp_createResident',(_firstName,_lastName,_username,_hashed_password))
+        cursor.callproc('sp_createResident',(_firstName,_lastName,_username,_hashed_password,_location))
 
         data = cursor.fetchall()
  
@@ -103,28 +104,7 @@ def validateLogin():
                 session['user'] = data[0][1]
                 session['fname'] = data[0][3]
                 session['lname'] = data[0][4]
-                session['location'] = data[0][4]
-                session['ssn'] = data[0][5]
-                session['dob'] = data[0][6]
-                session['sex'] = data[0][7]
-                session['phone'] = data[0][8]
-                session['email'] = data[0][9]
-                session['lang'] = data[0][10]
-                session['sleepout'] = data[0][11]
-                session['vethl'] = data[0][12]
-                session['eserve'] = data[0][13]
-                session['harm'] = data[0][14]
-                session['legal'] = data[0][15]
-                session['exploit'] = data[0][16]
-                session['money'] = data[0][17]
-                session['meaning'] = data[0][18]
-                session['selfcare'] = data[0][19]
-                session['social'] = data[0][20]
-                session['physical'] = data[0][21]
-                session['substance'] = data[0][21]
-                session['mental'] = data[0][22]
-                session['medication'] = data[0][23]
-                session['abuse'] = data[0][24]
+                session['location'] = data[0][5]
 
                 return json.dumps({'message':'success'})
             else:
@@ -172,7 +152,9 @@ def saveUserProfile():
 	
 	# validate the received values
     if True:
-        if _birthday != None:
+        if _birthday == '--':
+           _birthday = None
+        else:
             _birthday = datetime.strptime(_birthday, '%Y-%m-%d')
         if _ssn != None: 
             _ssn = int(_ssn)
@@ -295,17 +277,31 @@ def match():
     #new = [x[1:] for x in new]
     print new
 
-    userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname']}
+    userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname'], "location": session['location']}
     return render_template('user-shelters.html', userInfo = userInfo, shelterInfo = new)
     
     # get other relevant data about shelters and package for flask displsy (unknown)
 
+@app.route('/reserve',methods=['POST','GET'])
+def reserve():
+    _shelterID = request.form['shelterno']
+    print _shelterID
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('sp_createReservation',(session['id'], _shelterID, datetime.today()))
+
+    data = cursor.fetchall()
+
+    if len(data) is 0:
+        conn.commit()
+        return json.dumps({'message':'User modified successfully!'})
+    else:
+        return json.dumps({'message':str(data[0])})
+    
+
+
 if __name__ == "__main__":
-
-    #con = mysql.connect()
-    #cursor = con.cursor()
-    #cursor.execute("select * from Resident")
-    #print cursor.fetchall()
-
     app.run()
+
+
 

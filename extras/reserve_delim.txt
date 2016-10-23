@@ -1,0 +1,41 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createReservation`(
+    IN p_R_Id BIGINT,
+    IN p_S_Id BIGINT,
+    IN p_Now DATE
+)
+BEGIN
+    if ( select exists (select 1 from Reserved_at where R_Id = p_R_Id) ) THEN
+     
+        select 'Resident Already Registered for Shelter!';
+     
+    ELSE
+     
+        insert into Reserved_At
+        (
+            R_Id,
+            S_Id
+        )
+        values
+        (
+            p_R_Id,
+            p_S_Id
+        );
+         insert into Residence_Record
+        (
+            R_Id,
+            S_Id,
+            Date
+        )
+        values
+        (
+            p_R_Id,
+            p_S_Id,
+            p_Now
+        );
+        update shelter
+        set beds_avail = beds_avail - 1
+        where Id = p_R_Id;
+    END IF;
+END$$
+DELIMITER ;

@@ -3,7 +3,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createResident`(
     IN p_First_name VARCHAR(50),
     IN p_Last_name VARCHAR(50),
     IN p_Username VARCHAR(50),
-    IN p_Password VARCHAR(100)
+    IN p_Password VARCHAR(100),
+    IN p_Location VARCHAR(100)
 )
 BEGIN
     if ( select exists (select 1 from Resident where Username = p_Username) ) THEN
@@ -17,14 +18,16 @@ BEGIN
             First_name,
             Last_name,
             Username,
-            Password
+            Password,
+            Location
         )
         values
         (
             p_First_name,
             p_Last_name,
             p_Username,
-            p_Password
+            p_Password,
+            p_Location
         );
     END IF;
 END$$

@@ -18,10 +18,6 @@ $(function(){
                     alert("Sorry, that username is already taken!");
                 } else {
                     alert("You have successfully registered! Log in using your username and password in the top right corner");
-                    var c = "username=" + username + ";" + "firstName=" + firstName + ";" + "lastName=" + lastName + ";"
-                    document.cookie = "username=" + username + ";" + "firstName=" + firstName + ";" + "lastName=" + lastName + ";";
-                    alert(c);
-                    //location.href = "/showUserNavPage";
                 }
 				console.log(response);
 			},
