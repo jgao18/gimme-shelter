@@ -16,13 +16,14 @@ Once a client is registered, InShelter provides information to them on shelters 
 
 ## Shelter Registration
 
-To participate, shelters must register as well. Shelters have their own registration form at *(insert domain name here)* which makes them visible to nearby clients and tracks reservations and availability as clients make and drop reservations.
+To participate, shelters must register as well. Shelters have their own registration form at *(insert domain name here)* which makes them visible to nearby clients and tracks reservations and availability as clients make and drop reservations. Shelters update their capacity and availability as necessary.
 
 ## Built With
 
 * [Flask](http://flask.pocoo.org/) - A Python library that allows us to make SQL queries
 * [Google Maps API](https://developers.google.com/maps/) - Used to build distance matrices
 * [Bootstrap](http://getbootstrap.com/) - Used to quickly put together a website that automatically works on mobile
+* [MySQL](http://www.mysql.com/) - Open Source database environment
 
 ## Authors
 
@@ -39,3 +40,10 @@ This project was created by a team of programmers and innovators for the GlobalH
 * Christian Young
 * Zach Wright
 * Nikko Koutas
+
+## License
+
+* [Flask](http://flask.pocoo.org/docs/0.11/license/#flask-license)
+* Bootstrap - Licensed under the MIT license.
+* Google Maps - Licensed under Google's licensing.
+* MySQL - Licensed under GPL.
