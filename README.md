@@ -23,3 +23,19 @@ To participate, shelters must register as well. Shelters have their own registra
 * [Flask](http://flask.pocoo.org/) - A Python library that allows us to make SQL queries
 * [Google Maps API](https://developers.google.com/maps/) - Used to build distance matrices
 * [Bootstrap](http://getbootstrap.com/) - Used to quickly put together a website that automatically works on mobile
+
+## Authors
+
+This project was created by a team of programmers and innovators for the GlobalHack 6 competition during October 21-23. https://devpost.com/software/hello-2r830j
+
+### The Coders
+* [Christopher Lucas](https://github.com/cwlucas41)
+* [Joseph Gao](https://github.com/jgao18)
+* [Taylor Watson](https://github.com/TEWatson)
+* Johnny Peters
+
+### The Innovation Team
+* Joao Lopes
+* Christian Young
+* Zach Wright
+* Nikko Koutas
