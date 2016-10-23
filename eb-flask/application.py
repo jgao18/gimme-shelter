@@ -96,8 +96,6 @@ def validateLogin():
         cursor.callproc('sp_validateUserLogin',(_username,))
         data = cursor.fetchall()
 
-        print "going1"
-
         if len(data) > 0:
             print str(data[0][2])
             if check_password_hash(str(data[0][2]),_password):
@@ -135,7 +133,6 @@ def validateLogin():
             return json.dumps({'message':'error'})
  
     except Exception as e:
-        print "going3"
         return json.dumps({'message':'error'})  
     finally:
         cursor.close()
@@ -199,8 +196,8 @@ def saveUserProfile():
 def getPersonLocation(personId):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT Location FROM Resident WHERE Id=" + str(personId) + ";")
-    return cursor.fetchone()
+    cursor.execute("SELECT Location FROM Resident WHERE Id='" + str(personId) + "';")
+    return cursor.fetchone()[0]
 
 def calculate_age(born):
     today = date.today()
@@ -208,7 +205,8 @@ def calculate_age(born):
 
 def getElegibleShelters(personId):
     conn = mysql.connect()
-    cursor = conn.cursor.execute("SELECT DoB, Sex, Sleep_outside, Veteran_homeless, Emergency_service, Harm, Legal, Exploitation, Money, Meaningful, Self_care, Social, Physical, Substance, Mental, Medication, Abuse FROM Resident where User = " + str(personId))
+    cursor = conn.cursor()
+    cursor.execute("SELECT DoB, Sex, Sleep_outside, Veteran_homeless, Emergency_service, Harm, Legal, Exploitation, Money, Meaningful, Self_care, Social, Physical, Substance, Mental, Medication, Abuse FROM Resident where Id = '" + str(personId) + "';")
     personStats = cursor.fetchone()
 
     dob = personStats[0]
@@ -217,12 +215,13 @@ def getElegibleShelters(personId):
     personStats = personStats[2:]
 
     if dob != None and calculate_age(dob) >= 60:
-        personStats = personStats + 1
+        personStats = personStats + (1,)
     else:
-        personStats = personStats + 0
+        personStats = personStats + (0,)
 
-    cursor = conn.cursor.execute("SELECT Id, Takes_men, Takes_women, beds_avail, Sleep_outside, Veteran_homeless, Emergency_service, Harm, Legal, Exploitation, Money, Meaningful, Self_care, Social, Physical, Substance, Mental, Medication, Abuse, Elderly FROM Shelter")
-    shelterStats = cursor.fetchone()
+    cursor = conn.cursor()
+    cursor.execute("SELECT Id, Takes_men, Takes_women, beds_avail, Sleep_outside, Veteran_homeless, Emergency_service, Harm, Legal, Exploitation, Money, Meaningful, Self_care, Social, Physical, Substance, Mental, Medication, Abuse, Elderly FROM Shelter")
+    shelterStats = cursor.fetchall()
 
     elegible = []
     for shelterStat in shelterStats:
@@ -248,10 +247,12 @@ def getElegibleShelters(personId):
 def getShelterInfo(shelterIds):
     conn = mysql.connect()
     cursor = conn.cursor()
-    shelterLocs = [len(shelterIds)]
-    for i in shelterIds:
+    shelterLocs = []
+
+    for i in range(0, len(shelterIds)):
+
         cursor.execute("SELECT name, addr, beds_avail, closes_by FROM Shelter WHERE Id=" + str(shelterIds[i]) + ";")
-        shelterLocs[i] = cursor.fetchone()
+        shelterLocs.append(cursor.fetchone())
     return shelterLocs
 
 def convertGmapsData(result, numberOfAddresses):
@@ -265,13 +266,16 @@ def convertGmapsData(result, numberOfAddresses):
 
 @app.route('/match',methods=['POST','GET'])
 def match():
+
     personId = session['id'];
     personLocation = getPersonLocation(personId)
     shelters = getElegibleShelters(personId)
     shelterInfo = getShelterInfo(shelters)
+
     gmaps = googlemaps.Client(key='AIzaSyCfb_q7APSzGK1WSk64s_i-vc6UA-XEFEY')
-    
-    result = gmaps.distance_matrix(personLocation, [x[1] for x in shelterInfo])
+    y = [str(x[1]) for x in shelterInfo]
+
+    result = gmaps.distance_matrix(personLocation, y)
     if (result['status'] != 'OK'):
         print("Query failed: returned status" + result['status'])
         exit()
@@ -286,6 +290,9 @@ def match():
     new = sorted(new, key=lambda x: x[0])
     #new = [x[1:] for x in new]
     print new
+
+    userInfo = {"id": session['id'], "username": session['user'], "firstName": session['fname'], "lastName": session['lname']}
+    return render_template('user-shelters.html', userInfo = userInfo, shelterInfo = new)
     
     # get other relevant data about shelters and package for flask displsy (unknown)
 

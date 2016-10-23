@@ -1,0 +1,33 @@
+ insert into Shelter
+        (
+            Username,
+            Password,
+            Name,
+            addr,
+            capacity,
+            beds_avail,
+            closes_by,
+            Takes_men,
+            Takes_women,
+            Elderly,
+            Sleep_outside,
+            Veteran_homeless,
+            Emergency_service,
+            Harm,
+            Legal,
+            Exploitation,
+            Money,
+            Meaningful,
+            Self_care,
+            Social,
+            Physical,
+            Substance,
+            Mental,
+            Tri_morbidity,
+            Medication,
+            Abuse
+        )
+        values
+        (
+            "weacceptall", "password", "We Accept All Shelter", "Seattle, Washington", "20", "9", "22:22:22", 1, 1, 1, 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+        );
